@@ -7,4 +7,10 @@ public class ComputerPlayer implements Player {
 		
 	}
 
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

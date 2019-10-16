@@ -24,6 +24,10 @@ public class SmallBoard {
 			System.out.println();
 		}
 	}
+	//Prints a given row
+	public void printRow(int row){
+		System.out.print(board[row][0] + " " + board[row][1] + " " + board[row][2]);
+	}
 	
 	//Marks a field on the board as played by player and checks for any illegal moves
 	public boolean playMark(int i, int j, int player){

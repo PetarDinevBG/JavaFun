@@ -7,4 +7,10 @@ public class HumanPlayer implements Player {
 		
 	}
 
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
