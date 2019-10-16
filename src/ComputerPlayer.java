@@ -8,7 +8,7 @@ public class ComputerPlayer implements Player {
 	}
 
 	@Override
-	public void move() {
+	public void move(int board, int row, int col, int player) {
 		// TODO Auto-generated method stub
 		
 	}

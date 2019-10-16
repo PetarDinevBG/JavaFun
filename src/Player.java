@@ -1,6 +1,6 @@
 
 public interface Player {
 	void think();
-	void move();
+	void move(int board, int row, int column, int player);
 
 }
