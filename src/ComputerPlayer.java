@@ -2,15 +2,11 @@
 public class ComputerPlayer implements Player {
 
 	@Override
-	public void think() {
+	public Move think() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-	@Override
-	public void move(int board, int row, int col, int player) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

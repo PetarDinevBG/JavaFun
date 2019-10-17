@@ -8,18 +8,12 @@ public class HumanPlayer implements Player {
 	}
 
 	@Override
-	public void think() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void move(int board, int row, int col, int player) {
-		// TODO Auto-generated method stub
+	public Move think() {
+		return promptMove();
 		
 	}
 	
-	public void promptMove(){
+	public Move promptMove(){
 		Scanner scan = new Scanner(System.in);
 		int board = 0;
 		while(board < 1 || board > 9){
@@ -36,7 +30,7 @@ public class HumanPlayer implements Player {
 			System.out.println("Indicate column to play on(1 - 3): ");
 			column = scan.nextInt();
 		}
-		this.move(board, row, column, playerID);
+		return(new Move(board - 1, row - 1, column - 1, playerID));
 	}
 
 }

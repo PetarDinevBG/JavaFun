@@ -30,4 +30,8 @@ public class FullBoard {
 		}
 		System.out.println("-------------------");
 	}
+	
+	public void playerMove(Move move){
+		fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer());;
+	}
 }
