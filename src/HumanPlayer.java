@@ -12,7 +12,7 @@ public class HumanPlayer implements Player {
 		return promptMove();
 		
 	}
-	
+	//TODO implement check if board place is occupied
 	public Move promptMove(){
 		Scanner scan = new Scanner(System.in);
 		int board = 0;
