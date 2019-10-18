@@ -31,7 +31,11 @@ public class FullBoard {
 		System.out.println("-------------------");
 	}
 	
-	public void playerMove(Move move){
-		fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer());;
+	public int checkBoard(int board){
+		return fullBoard[board/3][board%3].checkWinner();
+	}
+	
+	public boolean playerMove(Move move){
+		return fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer());
 	}
 }

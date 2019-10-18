@@ -2,9 +2,11 @@ import java.util.Scanner;
 
 public class HumanPlayer implements Player {
 	private int playerID;
+	private boolean firstMove;
 	
-	public HumanPlayer(int playerID){
+	public HumanPlayer(int playerID, boolean firstMove){
 		this.playerID = playerID;
+		this.firstMove = firstMove;
 	}
 
 	@Override
@@ -16,9 +18,11 @@ public class HumanPlayer implements Player {
 	public Move promptMove(){
 		Scanner scan = new Scanner(System.in);
 		int board = 0;
-		while(board < 1 || board > 9){
-			System.out.println("Indicate board to play on(1 - 9): ");
-			board = scan.nextInt();
+		if(firstMove){
+			while(board < 1 || board > 9){
+				System.out.println("Indicate board to play on(1 - 9): ");
+				board = scan.nextInt();
+			}
 		}
 		int row = 0;
 		while(row < 1 || row > 9){
@@ -30,7 +34,12 @@ public class HumanPlayer implements Player {
 			System.out.println("Indicate column to play on(1 - 3): ");
 			column = scan.nextInt();
 		}
-		return(new Move(board - 1, row - 1, column - 1, playerID));
+		if(firstMove){
+			firstMove = false;
+			return(new Move(board - 1, row - 1, column - 1, playerID));	
+		}else{
+			return(new Move(row - 1, column - 1, playerID));
+		}
 	}
 
 }

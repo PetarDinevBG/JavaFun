@@ -42,4 +42,49 @@ public class SmallBoard {
 			return true;
 		}
 	}
+	
+	//Return 0, 1 or 2 depending if someone is winning the given row or not
+	private int checkRow(int row){
+		if(row < 0 || row > 2){
+			System.out.println("Wrong input in SmallBoard.checkRow() method: row = " + row);
+			return -1;
+		}else{
+			if(board[0][row] == board[1][row] && board[1][row] == board[2][row]){
+				return board[0][row];
+			}else{
+				return 0;
+			}
+		}
+	}
+	
+	//Return 0, 1 or 2 depending if someone is winning the given column or not
+	private int checkCol(int col){
+		if(col < 0 || col > 2){
+			System.out.println("Wrong input in SmallBoard.checkCol() method: col = " + col);
+			return -1;
+		}else{
+			if(board[col][0] == board[col][1] && board[col][1] == board[col][2]){
+				return board[col][0];
+			}else{
+				return 0;
+			}
+		}
+	}
+	
+	private int checkDiagonals(){
+		if(board[0][0] == board[1][1] && board[1][1] == board[2][2]){
+			return board[0][0];
+		}else if(board[0][2] == board[1][1] && board[1][1] == board[2][0]){
+			return board[1][1];
+		}else{
+			return 0;
+		}
+	}
+	
+	public int checkWinner(){
+		int rowWinner = Math.max(Math.max(checkRow(0), checkRow(1)), checkRow(2));
+		int colWinner = Math.max(Math.max(checkCol(0), checkCol(1)), checkCol(2));
+		int diagWinner = checkDiagonals();
+		return Math.max(rowWinner, Math.max(colWinner, diagWinner));
+	}
 }
