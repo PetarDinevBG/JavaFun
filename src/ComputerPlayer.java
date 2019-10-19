@@ -25,10 +25,10 @@ public class ComputerPlayer implements Player {
 			int col = i%3;
 			Move move = new Move(row, col, playerID);
 			if(testMove.playerMove(move, true) == true){
-				
+				possibleMoves.add(testMove);
 			}
 		}
 		
-		return null;
+		return possibleMoves;
 	}
 }
