@@ -1,10 +1,15 @@
 
 public class FullBoard {
 	private SmallBoard[][] fullBoard;
+	private int nextBoard;
 	
 	public FullBoard(){
 		fullBoard = new SmallBoard[3][3];
 		initBoard();
+	}
+	
+	public FullBoard(SmallBoard[][] fullBoard){
+		this.fullBoard = fullBoard.clone();
 	}
 	
 	private void initBoard(){
@@ -13,6 +18,20 @@ public class FullBoard {
 				fullBoard[i][j] = new SmallBoard();
 			}
 		}
+	}
+	
+	public FullBoard cloneFullBoard(){
+		SmallBoard[][] cloneBoard = new SmallBoard[3][3];
+		for(int i = 0; i < 3; i++){
+			for(int j = 0; j < 3; j++){
+				cloneBoard[i][j] = fullBoard[i][j].cloneBoard();
+			}
+		}
+		return new FullBoard(cloneBoard);
+	}
+	
+	public SmallBoard getSmallBoard(int row, int col){
+		return fullBoard[row][col];
 	}
 	
 	public void printBoard(){
@@ -35,7 +54,8 @@ public class FullBoard {
 		return fullBoard[board/3][board%3].checkWinner();
 	}
 	
-	public boolean playerMove(Move move){
-		return fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer());
+	public boolean playerMove(Move move, boolean testMove){
+		nextBoard = move.getRow()*3 + move.getCol();
+		return fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer(), testMove);
 	}
 }

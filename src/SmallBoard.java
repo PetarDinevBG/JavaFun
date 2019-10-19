@@ -7,6 +7,10 @@ public class SmallBoard {
 		boardInit();
 	}
 	
+	public SmallBoard(int[][] board){
+		this.board = board.clone();
+	}
+	
 	//Initialize board entries to 0
 	private void boardInit(){
 		for(int i = 0; i < 3; i++){
@@ -30,17 +34,29 @@ public class SmallBoard {
 	}
 	
 	//Marks a field on the board as played by player and checks for any illegal moves
-	public boolean playMark(int i, int j, int player){
+	public boolean playMark(int i, int j, int player, boolean testMove){
 		if(i < 0 || i > 2 || j < 0 || j > 2 || player < 1 || player > 2){
 			System.out.println("Wrong input in small board playMark()!");
 			return false;
 		}else if(board[i][j] != 0){
-			System.out.println("Error: Someone has already played here!");
+			if(testMove == false){
+				System.out.println("Error: Someone has already played here!");
+			}
 			return false;
 		}else{
 			board[i][j] = player;
 			return true;
 		}
+	}
+	
+	public SmallBoard cloneBoard(){
+		int[][] cloneBoard = new int[3][3];
+		for(int i = 0; i < 3; i++){
+			for(int j = 0; j < 3; j++){
+				cloneBoard[i][j] = board[i][j];
+			}
+		}
+		return new SmallBoard(cloneBoard);
 	}
 	
 	//Return 0, 1 or 2 depending if someone is winning the given row or not
