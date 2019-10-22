@@ -18,10 +18,6 @@ public class ComputerPlayer implements Player {
 		return possibleMoves.get(randomMove);
 	}
 	
-	public double heuristicFunc(FullBoard board){
-		return 0;
-	}
-	
 	public LinkedList<Move> getPossibleMoves(FullBoard board, int currentBoard){
 		LinkedList<Move> possibleMoves = new LinkedList<Move>();
 		for(int i = 0; i < 9; i++){
