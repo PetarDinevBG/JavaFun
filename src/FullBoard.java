@@ -20,6 +20,10 @@ public class FullBoard {
 		}
 	}
 	
+	public int getNextBoard(){
+		return nextBoard;
+	}
+	
 	public FullBoard cloneFullBoard(){
 		SmallBoard[][] cloneBoard = new SmallBoard[3][3];
 		for(int i = 0; i < 3; i++){

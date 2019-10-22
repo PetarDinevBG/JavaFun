@@ -10,7 +10,7 @@ public class HumanPlayer implements Player {
 	}
 
 	@Override
-	public Move think() {
+	public Move think(FullBoard board) {
 		return promptMove();
 		
 	}

@@ -1,5 +1,5 @@
 
 public interface Player {
-	Move think();
+	Move think(FullBoard board);
 
 }
