@@ -3,47 +3,21 @@ import java.util.Random;
 
 public class ComputerPlayer implements Player {
 	private int playerID;
+	private ComputerBrain brain;
 	
 	public ComputerPlayer(int playerID){
 		this.playerID = playerID;
+		brain = new ComputerBrain(null, playerID);
 	}
 
 	@Override
 	public Move think(FullBoard board) {
-		LinkedList<Move> possibleMoves = getPossibleMoves(board, board.getNextBoard());
+		brain.setBoard(board.cloneFullBoard());
+		LinkedList<Move> possibleMoves = brain.getPossibleMoves(board, board.getNextBoard());
 		//TODO Implement actual thinking, Random moves in the meantime
 		Random rand = new Random();
 		int randomMove = rand.nextInt(possibleMoves.size());
 		
 		return possibleMoves.get(randomMove);
-	}
-	
-	public LinkedList<Move> getPossibleMoves(FullBoard board, int currentBoard){
-		LinkedList<Move> possibleMoves = new LinkedList<Move>();
-		for(int i = 0; i < 9; i++){
-			FullBoard testBoard = board.cloneFullBoard();
-			int row = i/3;
-			int col = i%3;
-			Move move = new Move(row, col, playerID);
-			if(testBoard.playerMove(move, true) == true){
-				possibleMoves.add(move);
-			}
-		}
-		return possibleMoves;
-	}
-	
-	public LinkedList<FullBoard> getPossibleBoards(FullBoard board, int currentBoard){
-		LinkedList<FullBoard> possibleBoards = new LinkedList<FullBoard>();
-		for(int i = 0; i < 9; i++){
-			FullBoard testMove = board.cloneFullBoard();
-			int row = i/3;
-			int col = i%3;
-			Move move = new Move(row, col, playerID);
-			if(testMove.playerMove(move, true) == true){
-				possibleBoards.add(testMove);
-			}
-		}
-		
-		return possibleBoards;
 	}
 }
