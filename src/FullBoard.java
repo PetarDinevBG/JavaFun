@@ -58,6 +58,16 @@ public class FullBoard {
 		return fullBoard[board/3][board%3].checkWinner();
 	}
 	
+	public int checkWinner(){
+		for(int board = 0; board < 9; board++){
+			int winner = checkBoard(board);
+			if(winner != 0){
+				return winner;
+			}
+		}
+		return 0;
+	}
+	
 	public boolean playerMove(Move move, boolean testMove){
 		nextBoard = move.getRow()*3 + move.getCol();
 		return fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer(), testMove);
