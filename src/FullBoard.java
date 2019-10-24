@@ -47,6 +47,10 @@ public class FullBoard {
 		return fullBoard[row][col];
 	}
 	
+	public SmallBoard getSmallBoard(int board){
+		return fullBoard[board/3][board%3];
+	}
+	
 	public void printBoard(){
 		for(int i = 0; i < 9; i++){
 			if(i%3 == 0){
@@ -80,5 +84,16 @@ public class FullBoard {
 	public boolean playerMove(Move move, boolean testMove){
 		nextBoard = move.getRow()*3 + move.getCol();
 		return fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer(), testMove);
+	}
+	
+	//Heuristic helper functions
+	public int numberOfCenters(int playerID){
+		int result = 0;
+		for(int i = 0; i < 9; i++){
+			if(this.getSmallBoard(i).hasCenter() == playerID){
+				result++;
+			}
+		}
+		return result;
 	}
 }

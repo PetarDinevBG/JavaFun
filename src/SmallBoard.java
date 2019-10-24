@@ -103,4 +103,9 @@ public class SmallBoard {
 		int diagWinner = checkDiagonals();
 		return Math.max(rowWinner, Math.max(colWinner, diagWinner));
 	}
+	
+	//Heuristic Helping Functions
+	public int hasCenter(){
+		return board[1][1];
+	}
 }
