@@ -12,6 +12,11 @@ public class FullBoard {
 		this.fullBoard = fullBoard.clone();
 	}
 	
+	public FullBoard(SmallBoard[][] fullBoard, int nextBoard){
+		this.fullBoard = fullBoard.clone();
+		this.nextBoard = nextBoard;
+	}
+	
 	private void initBoard(){
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 3; j++){
@@ -24,6 +29,10 @@ public class FullBoard {
 		return nextBoard;
 	}
 	
+	public void setNextBard(int nextBoard){
+		this.nextBoard = nextBoard;
+	}
+	
 	public FullBoard cloneFullBoard(){
 		SmallBoard[][] cloneBoard = new SmallBoard[3][3];
 		for(int i = 0; i < 3; i++){
@@ -31,7 +40,7 @@ public class FullBoard {
 				cloneBoard[i][j] = fullBoard[i][j].cloneBoard();
 			}
 		}
-		return new FullBoard(cloneBoard);
+		return new FullBoard(cloneBoard, nextBoard);
 	}
 	
 	public SmallBoard getSmallBoard(int row, int col){

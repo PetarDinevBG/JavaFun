@@ -13,6 +13,6 @@ public class ComputerPlayer implements Player {
 	@Override
 	public Move think(FullBoard board) {
 		brain.setBoard(board.cloneFullBoard());
-		return brain.nextMove(board);
+		return brain.nextMove(board.cloneFullBoard());
 	}
 }
