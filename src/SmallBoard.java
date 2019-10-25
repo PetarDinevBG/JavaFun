@@ -108,4 +108,58 @@ public class SmallBoard {
 	public int hasCenter(){
 		return board[1][1];
 	}
+	
+	private int colWinningMoves(int col, int playerID){
+		int possibleWinningMoves = 0;
+		if(board[col][0] == playerID && board[col][1] == playerID && board[col][2] == 0){
+			possibleWinningMoves++;
+		}else if(board[col][1] == playerID && board[col][2] == playerID && board[col][0] == 0){
+			possibleWinningMoves++;
+		}else if(board[col][0] == playerID && board[col][2] == playerID && board[col][1] == 0){
+			possibleWinningMoves++;
+		}
+		return possibleWinningMoves;
+	}
+	
+	private int rowWinningMoves(int row, int playerID){
+		int possibleWinningMoves = 0;
+		if(board[0][row] == playerID && board[1][row] == playerID && board[2][row] == 0){
+			possibleWinningMoves++;
+		}else if(board[1][row] == playerID && board[2][row] == playerID && board[0][row] == 0){
+			possibleWinningMoves++;
+		}else if(board[0][row] == playerID && board[2][row] == playerID && board[1][row] == 0){
+			possibleWinningMoves++;
+		}
+		return possibleWinningMoves;
+	}
+	
+	private int diagWinningMoves(int playerID){
+		int possibleWinningMoves = 0;
+		if(board[0][0] == playerID && board[1][1] == playerID && board[2][2] == 0){
+			possibleWinningMoves++;
+		}else if(board[1][1] == playerID && board[2][2] == playerID && board[0][0] == 0){
+			possibleWinningMoves++;
+		}else if(board[0][0] == playerID && board[2][2] == playerID && board[1][1] == 0){
+			possibleWinningMoves++;
+		}
+
+		if(board[2][0] == playerID && board[1][1] == playerID && board[0][2] == 0){
+			possibleWinningMoves++;
+		}else if(board[1][1] == playerID && board[0][2] == playerID && board[2][0] == 0){
+			possibleWinningMoves++;
+		}else if(board[2][0] == playerID && board[0][2] == playerID && board[1][1] == 0){
+			possibleWinningMoves++;
+		}
+		return possibleWinningMoves;
+	}
+	
+	public int winningMoves(int playerID){
+		int possibleWinningMoves = 0;
+		possibleWinningMoves += colWinningMoves(0, playerID) + colWinningMoves(1, playerID) + colWinningMoves(2, playerID);
+		possibleWinningMoves += rowWinningMoves(0, playerID) + rowWinningMoves(1, playerID) + rowWinningMoves(2, playerID);
+		possibleWinningMoves += diagWinningMoves(playerID);
+		return possibleWinningMoves;
+	}
+	
+	
 }

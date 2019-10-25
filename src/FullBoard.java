@@ -81,6 +81,14 @@ public class FullBoard {
 		return 0;
 	}
 	
+	public int possibleWinningMoves(int playerID){
+		int possibleWinningMoves = 0;
+		for(int i = 0; i < 9; i++){
+			possibleWinningMoves += fullBoard[i/3][i%3].winningMoves(playerID);
+		}
+		return possibleWinningMoves;
+	}
+	
 	public boolean playerMove(Move move, boolean testMove){
 		nextBoard = move.getRow()*3 + move.getCol();
 		return fullBoard[move.getBoard()/3][move.getBoard()%3].playMark(move.getRow(), move.getCol(), move.getPlayer(), testMove);
