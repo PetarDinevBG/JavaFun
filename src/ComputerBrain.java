@@ -25,7 +25,7 @@ public class ComputerBrain {
 		LinkedList<FullBoard> possibleBoards = getPossibleBoards(board, board.getNextBoard(),currentPlayer(0));
 		LinkedList<Double> moveValues = new LinkedList<Double>();
 		for(FullBoard posBoard: possibleBoards){
-			moveValues.add(evaluateMove(posBoard, 0));
+			moveValues.add(evaluateMove(posBoard, 0, -1000, 1000));
 		}
 		System.out.println(currentPlayer(0));
 		System.out.println(moveValues);
@@ -39,7 +39,7 @@ public class ComputerBrain {
 		return possibleMoves.get(moveValues.indexOf(moveValue));
 	}
 	
-	private double evaluateMove(FullBoard board, int currentLevel){
+	private double evaluateMove(FullBoard board, int currentLevel, double alpha, double beta){
 		movesExplored ++;
 		int winner = board.checkWinner();
 		if(winner == 2){
@@ -48,8 +48,8 @@ public class ComputerBrain {
 			return 1;
 		}
 		//TODO Change currentLevel to implement computer difficulty
-		if(currentLevel < 5){
-			LinkedList<Double> possibleMovesValues = evaluateChildren(getPossibleBoards(board, board.getNextBoard(), currentPlayer(currentLevel + 1)), currentLevel + 1);
+		if(currentLevel < 7){
+			LinkedList<Double> possibleMovesValues = evaluateChildren(getPossibleBoards(board, board.getNextBoard(), currentPlayer(currentLevel + 1)), currentLevel + 1, alpha, beta);
 			if(currentPlayer(currentLevel) == 2){
 				return maxValueLinkedList(possibleMovesValues);
 			}else{
@@ -62,10 +62,33 @@ public class ComputerBrain {
 
 	}
 	
-	public LinkedList<Double> evaluateChildren(LinkedList<FullBoard> possibleMoves, int currentLevel){
+	public LinkedList<Double> evaluateChildren(LinkedList<FullBoard> possibleMoves, int currentLevel, double alpha, double beta){
 		LinkedList<Double> possibleMovesValues = new LinkedList<Double>();
+		double val;
+		boolean flag = false;
+		if(currentPlayer(currentLevel) == 1){
+			val = -1000;
+		}else{
+			val = 1000;
+		}
 		for(FullBoard board: possibleMoves){
-			possibleMovesValues.add(evaluateMove(board, currentLevel));
+			double moveValue = evaluateMove(board, currentLevel, alpha, beta);
+			if(currentPlayer(currentLevel) == 1){
+				val = Math.max(val, moveValue);
+				alpha = Math.max(val, alpha);
+				possibleMovesValues.add(moveValue);
+				if( alpha >= beta){
+					break;
+				}
+			}else{
+				val = Math.min(val, moveValue);
+				beta = Math.min(val, beta);
+				possibleMovesValues.add(moveValue);
+				if( alpha >= beta){
+					break;
+				}
+			}
+
 		}
 		return possibleMovesValues;
 	}
