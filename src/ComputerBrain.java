@@ -27,6 +27,7 @@ public class ComputerBrain {
 		for(FullBoard posBoard: possibleBoards){
 			moveValues.add(evaluateMove(posBoard, 0));
 		}
+		System.out.println(currentPlayer(0));
 		System.out.println(moveValues);
 		double moveValue;
 		if(currentPlayer(0) == 1){
@@ -49,7 +50,7 @@ public class ComputerBrain {
 		//TODO Change currentLevel to implement computer difficulty
 		if(currentLevel < 5){
 			LinkedList<Double> possibleMovesValues = evaluateChildren(getPossibleBoards(board, board.getNextBoard(), currentPlayer(currentLevel + 1)), currentLevel + 1);
-			if(currentPlayer(currentLevel) == 1){
+			if(currentPlayer(currentLevel) == 2){
 				return maxValueLinkedList(possibleMovesValues);
 			}else{
 				return minValueLinkedList(possibleMovesValues);
